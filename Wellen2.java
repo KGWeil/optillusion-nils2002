@@ -10,7 +10,10 @@ import processing.core.PFont;
  * @version (eine Versionsnummer oder ein Datum)
  */
 public class Wellen2 extends PApplet
-{       
+{   
+    int s=50;//Seitenlänge Rahmen
+    int a=25;//Seitenabstand
+
     /**
      * settings() Methode 
      * Fenstergröße size(int width, int height) und smooth(int level) muss hier eingestellt werden.
@@ -21,6 +24,30 @@ public class Wellen2 extends PApplet
         size(500,500);
     }        
 
+    public void zeichneQuadrate(int x, int y, boolean gruen)
+    {
+        noStroke();
+        if(gruen==true){fill(40,180,40);} 
+        else{fill(255);}
+        square(x,y,s);
+        if(gruen==true){fill(255);} 
+        else{fill(40,180,40);}
+        square(x+5,y+5,s-10);
+    }
+
+    public void zeichneAlleQuadrate(boolean farbe)
+    {
+        for (int j=0; j<9; j++)
+        {
+            for (int i=0; i<9; i++)
+            {
+                zeichneQuadrate(a+i*s,a+j*s,farbe);
+                if(farbe==true) {farbe=!farbe;}
+                else{farbe=true;}
+            }
+        }
+    }
+
     /**
      * Die setup() Methode wird einmal aufgerufen, wenn das Programm startet.
      * Hier werden Einstellungen wie die Hintergrundfarbe vorgenommen
@@ -29,7 +56,8 @@ public class Wellen2 extends PApplet
     @Override
     public void setup()
     {
-
+        background(255);
+        zeichneAlleQuadrate(true);
     }
 
     /**
